@@ -1,5 +1,7 @@
 import {List, Map} from 'immutable'
 
+export const INITIAL_STATE = Map();
+
 // Basic function to set 'entries' of the given state variable
 // Use List constructor to convert all input to be an immutable list
 export function setEntries(state, entries) {
