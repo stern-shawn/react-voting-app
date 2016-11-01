@@ -1,5 +1,6 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import Winner from './Winner'
 
 export default React.createClass({
   mixins: [PureRenderMixin],
@@ -15,7 +16,10 @@ export default React.createClass({
     return 0
   },
   render: function() {
-    return <div className="results">
+    // Render winner if there is one, otherwise the interface...
+    return this.props.winner ?
+    <Winner ref="winner" winner={this.props.winner} /> :
+    <div className="results">
       <div className="tally">
         {this.getPair().map(entry =>
         <div key={entry} className="entry">
