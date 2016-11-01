@@ -1,34 +1,20 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Winner from './Winner'
+import Tally from './Tally'
 
 export default React.createClass({
   mixins: [PureRenderMixin],
   getPair: function() {
     return this.props.pair || []
   },
-  // Return the vote count for the given entry
-  getVotes: function(entry) {
-    if (this.props.tally && this.props.tally.has(entry)) {
-      return this.props.tally.get(entry)
-    }
-    // If nothing found, tally must be 0
-    return 0
-  },
   render: function() {
     // Render winner if there is one, otherwise the interface...
     return this.props.winner ?
     <Winner ref="winner" winner={this.props.winner} /> :
     <div className="results">
-      <div className="tally">
-        {this.getPair().map(entry =>
-        <div key={entry} className="entry">
-          <h1>{entry}</h1>
-          <div className="voteCount">
-            {this.getVotes(entry)}
-          </div>
-        </div>)}
-      </div>
+      // Lets play with sending props both as the returns of functions and directly
+      <Tally ref="tally" pair={this.getPair()} tally={this.props.tally} />
       <div className="management">
         <button ref="next" className="next" onClick={this.props.next}>Next</button>
       </div>
