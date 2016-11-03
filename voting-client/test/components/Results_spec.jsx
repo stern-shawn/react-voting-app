@@ -10,7 +10,6 @@ import Results from '../../src/components/Results'
 import {expect} from 'chai'
 
 describe('Results', () => {
-
   it('renders entries with vote counts or zero', () => {
     const pair = List.of('Trainspotting', '28 Days Later')
     const tally = Map({'Trainspotting': 5})
@@ -29,7 +28,7 @@ describe('Results', () => {
 
   it('invokes the next callback when the next button is clicked', () => {
     let nextInvoked = false
-    const next = () => {nextInvoked = true}
+    const next = () => { nextInvoked = true }
 
     const pair = List.of('Trainspotting', '28 Days Later')
     const component = renderIntoDocument(
@@ -42,8 +41,8 @@ describe('Results', () => {
 
   it('renders the winner when there is one', () => {
     const component = renderIntoDocument(
-      <Results winner="Trainspotting"
-               pair={["Trainspotting", "28 Days Later"]}
+      <Results winner='Trainspotting'
+               pair={['Trainspotting', '28 Days Later']}
                tally={Map()} />
     )
     const winner = ReactDOM.findDOMNode(component.refs.winner)

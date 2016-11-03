@@ -13,7 +13,7 @@ import Voting from '../../src/components/Voting'
 describe('Voting', () => {
   it('render a pair of buttons', () => {
     const component = renderIntoDocument(
-      <Voting pair={["Trainspotting", "28 Days Later"]} />
+      <Voting pair={['Trainspotting', '28 Days Later']} />
     )
     // scry function finds our rendered button elements in the virtual DOM
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
@@ -27,11 +27,11 @@ describe('Voting', () => {
     let votedWith
     // Tutorial doesn't wrap function in curly braces. While this works,
     // I feel more comfortable having curly brackets containing the function
-    const vote = (entry) => {votedWith = entry}
+    const vote = (entry) => { votedWith = entry }
 
     const component = renderIntoDocument(
-      <Voting pair={["Trainspotting", "28 Days Later"]}
-              vote={vote}/>
+      <Voting pair={['Trainspotting', '28 Days Later']}
+              vote={vote} />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     Simulate.click(buttons[0])
@@ -41,8 +41,8 @@ describe('Voting', () => {
 
   it('disables buttons when user has voted', () => {
     const component = renderIntoDocument(
-      <Voting pair={["Trainspotting", "28 Days Later"]}
-              hasVoted="Trainspotting" />
+      <Voting pair={['Trainspotting', '28 Days Later']}
+              hasVoted='Trainspotting' />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
 
@@ -53,8 +53,8 @@ describe('Voting', () => {
 
   it('adds label to the voted entry', () => {
     const component = renderIntoDocument(
-      <Voting pair={["Trainspotting", "28 Days Later"]}
-              hasVoted="Trainspotting" />
+      <Voting pair={['Trainspotting', '28 Days Later']}
+              hasVoted='Trainspotting' />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
 
@@ -63,7 +63,7 @@ describe('Voting', () => {
 
   it('renders just the winner when there is one', () => {
     const component = renderIntoDocument(
-      <Voting winner="Trainspotting" />
+      <Voting winner='Trainspotting' />
     )
     const buttons = scryRenderedDOMComponentsWithTag(component, 'button')
     expect(buttons.length).to.equal(0)
