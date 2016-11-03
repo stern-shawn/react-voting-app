@@ -1,7 +1,7 @@
 import Server from 'socket.io'
 
 // Attach our server to port 8090
-export default function startServer(store) {
+export default function startServer (store) {
   const io = new Server().attach(8090)
 
   // Every time there is a change, send the new state to all subscribers
