@@ -11,17 +11,10 @@ import {ResultsContainer} from './components/Results'
 
 // Create a Redux store and give it an initial state using 'SET_STATE' action
 const store = createStore(reducer)
-store.dispatch({
-  type: 'SET_STATE',
-  state: {
-    vote: {
-      pair: ['Sunshine', '28 Days Later'],
-      tally: {Sunshine: 2}
-    }
-  }
-})
 
+// Set up our connection to the server. SET_STATE whenever it sends state
 const socket = io(`${location.protocol}//${location.hostname}:8090`)
+socket.on('state', state => store.dispatch({type: 'SET_STATE', state}))
 
 const routes = <Route component={App}>
   <Route path='/results' component={ResultsContainer} />
