@@ -11,16 +11,21 @@ import App from './components/App'
 import {VotingContainer} from './components/Voting'
 import {ResultsContainer} from './components/Results'
 
-// Take the middleware we want registered and apply it when we create the
-// redux store
-const createStoreWithMiddleware = applyMiddleware(
-  remoteActionMiddleware
-)(createStore)
-const store = createStoreWithMiddleware(reducer)
+// Switching the locations of the declaration of store and socket.
+// We now need socket to exist first since it's being passed to the middleware
+// connected to the store
 
 // Set up our connection to the server. SET_STATE whenever it sends state
 const socket = io(`${location.protocol}//${location.hostname}:8090`)
 socket.on('state', state => store.dispatch(setState(state)))
+
+// Take the middleware we want registered and apply it when we create the
+// redux store
+const createStoreWithMiddleware = applyMiddleware(
+  // Pass the socket to our middleware so we can send actions to the server...
+  remoteActionMiddleware(socket)
+)(createStore)
+const store = createStoreWithMiddleware(reducer)
 
 const routes = <Route component={App}>
   <Route path='/results' component={ResultsContainer} />
