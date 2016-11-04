@@ -1,4 +1,4 @@
-import {Map} from 'immutable'
+import {List, Map} from 'immutable'
 
 // Helper function to merge new state into previous state
 function setState (state, newState) {
@@ -17,11 +17,23 @@ function vote (state, entry) {
   }
 }
 
+function resetVote (state) {
+  const hasVoted = state.get('hasVoted')
+  // Make sure that the result of getIn is cast to immutable List
+  const currentPair = state.getIn(['vote', 'pair'], List())
+
+  if (hasVoted && !currentPair.includes('hasVoted')) {
+    return state.remove('hasVoted')
+  } else {
+    return state
+  }
+}
+
 // Use the ES6 defaults notation to have state set to a map if none given
 export default function (state = Map(), action) {
   switch (action.type) {
     case 'SET_STATE':
-      return setState(state, action.state)
+      return resetVote(setState(state, action.state))
     case 'VOTE':
       return vote(state, action.entry)
   }
